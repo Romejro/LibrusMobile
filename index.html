@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librus Mobile – Pobierz aplikację na Androida</title>
+  <meta name="description" content="Nowoczesny, szybki i w 100% bezpłatny klient e-dziennika LIBRUS Synergia dla systemu Android bez reklam.">
+  <meta name="theme-color" content="#1565C0">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Librus Mobile – Nowoczesny e-Dziennik bez reklam">
+  <meta property="og:description" content="Pobierz najnowszą wersję Librus Mobile na system Android. Oceny, plan lekcji, wiadomości, terminarz i frekwencja w nowoczesnym wydaniu.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1E88E5;
+      --primary-dark: #1565C0;
+      --primary-light: #E3F2FD;
+      --accent: #FF9800;
+      --accent-glow: rgba(255, 152, 0, 0.25);
+      --bg: #0B0F19;
+      --surface: #131B2E;
+      --surface-border: #1E293B;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --grade-green: #2E7D32;
+      --grade-blue: #1E88E5;
+      --grade-amber: #F9A825;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background glows */
+    .glow-top {
+      position: absolute;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(30, 136, 229, 0.25) 0%, rgba(11, 15, 25, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header / Nav */
+    header {
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(30, 136, 229, 0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--surface-border);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .github-link:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(30, 136, 229, 0.12);
+      color: #64B5F6;
+      border: 1px solid rgba(30, 136, 229, 0.3);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #64B5F6 0%, #1E88E5 50%, #FFB74D 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 36px;
+    }
+
+    /* Call to Action Buttons */
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 36px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(30, 136, 229, 0.45);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(30, 136, 229, 0.6);
+      filter: brightness(1.1);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--surface-border);
+      color: var(--text-main);
+      padding: 16px 28px;
+      border-radius: 36px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .release-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .release-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Mockup Preview Card */
+    .preview-card {
+      margin: 48px auto 60px;
+      max-width: 850px;
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+
+    .feature-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(30, 136, 229, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(30, 136, 229, 0.15);
+      color: #64B5F6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .feature-item h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-item p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Installation Guide Section */
+    .install-section {
+      padding: 50px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      position: relative;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .step-card h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 50px 0 80px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+    }
+
+    .faq-item h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #E2E8F0;
+    }
+
+    .faq-item p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 36px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: #64B5F6;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .disclaimer {
+      margin-top: 12px;
+      font-size: 0.78rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-top"></div>
+
+  <div class="container">
+    <!-- Navigation Bar -->
+    <header>
+      <a href="#" class="brand">
+        <div class="brand-icon">
+          <!-- Graduation Cap SVG -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+        </div>
+        <span>Librus Mobile</span>
+      </a>
+      <div class="nav-links">
+        <a href="https://github.com" target="_blank" rel="noopener" class="github-link" id="repoLink">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="badge">
+        <span>🚀 Wersja 1.0 Release</span> • <span>Dla systemu Android</span>
+      </div>
+      <h1>Twój e-Dziennik Synergia.<br><span>Szybki, ładny i bez reklam.</span></h1>
+      <p>Nowoczesny, bezpłatny klient dziennika Librus Synergia stworzony w Jetpack Compose i Material 3. Oceny, plan lekcji, wiadomości, terminarz i frekwencja zawsze pod ręką.</p>
+
+      <div class="cta-group">
+        <a href="https://github.com/OWNER/REPO/releases/latest/download/app-release.apk" id="downloadBtn" class="btn-download" download="LibrusMobile-release.apk">
+          <!-- Download SVG -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Pobierz APK (v1.0)</span>
+        </a>
+
+        <a href="#instrukcja" class="btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <span>Jak zainstalować?</span>
+        </a>
+      </div>
+
+      <div class="release-meta">
+        <span>✅ Podpisany pakiet Release</span>
+        <span>📱 Android 8.0 lub nowszy</span>
+        <span>📦 Rozmiar: ~14.4 MB</span>
+        <span>🛡️ 100% Open Source</span>
+      </div>
+    </section>
+
+    <!-- Features Overview -->
+    <div class="preview-card">
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3>Oceny i Średnie</h3>
+          <p>Automatyczne wyliczanie średnich ważonych, podział na kategorie, wagi i pełne komentarze nauczycieli.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <h3>Plan lekcji</h3>
+          <p>Tygodniowy rozkład zajęć z oznaczeniem zastępstw, odwołanych lekcji, gabinetów i notatek.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <h3>Wszystkie wiadomości</h3>
+          <p>Wielostronicowa skrzynka odbiorcza bez limitów, wyszukiwanie, filtry i załączniki.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          </div>
+          <h3>Powiadomienia w tle</h3>
+          <p>Automatyczne powiadomienia o nowych ocenach, wiadomościach i zapowiedzianych sprawdzianach.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3>100% Prywatności</h3>
+          <p>Brak serwerów pośredniczących. Twoje dane logowania i oceny trafiają bezpośrednio do Synergii.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <h3>Szczęśliwy numerek</h3>
+          <p>Zawsze aktualny numerek na dziś wyświetlany bezpośrednio na ekranie głównym aplikacji.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation Steps -->
+    <section class="install-section" id="instrukcja">
+      <div class="section-title">
+        <h2>Jak zainstalować aplikację?</h2>
+        <p>Tylko 3 proste kroki, aby zacząć korzystać z Librus Mobile na swoim telefonie</p>
+      </div>
+
+      <div class="steps-container">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>Pobierz plik APK</h4>
+          <p>Kliknij przycisk <strong>„Pobierz APK”</strong> powyżej. Plik instalacyjny <code>app-release.apk</code> zostanie pobrany na Twoje urządzenie z Androidem.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>Zezwól na instalację</h4>
+          <p>Otwórz pobrany plik z powiadomień lub Menedżera plików. Jeśli system zapyta, zezwól przeglądarce na instalowanie aplikacji z nieznanych źródeł.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>Zaloguj się i korzystaj</h4>
+          <p>Uruchom aplikację Librus Mobile i zaloguj się swoimi standardowymi danymi konta Synergia. Twoje oceny i plan załadują się natychmiast!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="section-title">
+        <h2>Często zadawane pytania (FAQ)</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>Czy korzystanie z aplikacji jest bezpieczne?</h4>
+          <p>Tak! Aplikacja jest w 100% otwartoźródłowa (Open Source). Nie posiada żadnych serwerów zbierających dane – komunikacja odbywa się wyłącznie bezpośrednio między Twoim telefonem a oficjalnymi serwerami Librus Synergia.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Dlaczego system wyświetla komunikat o „nieznanym źródle”?</h4>
+          <p>Komunikat ten pojawia się na każdym telefonie z Androidem przy instalacji aplikacji spoza sklepu Google Play (tzw. sideloading). Plik APK jest bezpieczny i cyfrowo podpisany.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Czy aplikacja działa w trybie offline?</h4>
+          <p>Tak. Wszystkie pobrane wcześniej oceny, plan lekcji, terminarz i wiadomości są zapisywane w pamięci telefonu i możesz je przeglądać nawet bez dostępu do Internetu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>Librus Mobile • Wersja 1.0 Release</p>
+      <p class="disclaimer">
+        Aplikacja jest nieoficjalnym klientem open-source stworzonym w celach ułatwienia dostępu do e-dziennika.<br>
+        Wszelkie znaki towarowe i nazwy „Librus” oraz „Synergia” należą do Librus Sp. z o.o.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Automatyczne wykrycie repozytorium GitHub jeśli strona jest hostowana na GitHub Pages
+    (function() {
+      var hostname = window.location.hostname;
+      var pathname = window.location.pathname;
+
+      if (hostname.endsWith('github.io')) {
+        var user = hostname.split('.')[0];
+        var repo = pathname.split('/')[1] || '';
+        if (repo) {
+          var repoUrl = 'https://github.com/' + user + '/' + repo;
+          var downloadUrl = repoUrl + '/releases/latest/download/app-release.apk';
+
+          var dlBtn = document.getElementById('downloadBtn');
+          if (dlBtn) dlBtn.href = downloadUrl;
+
+          var rpLink = document.getElementById('repoLink');
+          if (rpLink) rpLink.href = repoUrl;
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
